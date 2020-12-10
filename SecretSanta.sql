@@ -1,29 +1,30 @@
-create table Users (
+create table users (
 	user_id int primary key auto_increment,
-	name text,
-	username text,
+	name text unique,
+	username text unique,
 	password text,
-    	`time` timestamp
+    `time` timestamp
 );
 
-create table Rooms (
+create table rooms (
 	room_id int primary key auto_increment,
 	admin_user_id int,
 	title text,
 	table_status boolean,
-    	room_url integer,
-   	room_password text,
-    	`time` timestamp,
-    	foreign key (admin_user_id) references Users(user_id)
+    room_url integer,
+    room_password text,
+    `time` timestamp,
+    foreign key (admin_user_id) references users(user_id)
 );
 
-create table RoomUsers (
+create table roomUsers (
 	room_user_id integer,
 	room_id integer,
 	user_id integer,
 	picked_user_id integer,
-    	time timestamp,
-    	foreign key (user_id) references Users(user_id),
-    	foreign key (room_id) references Rooms(room_id),
-    	foreign key (picked_user_id) references Users(user_id)
-);  
+    time timestamp,
+    foreign key (user_id) references users(user_id),
+    foreign key (room_id) references rooms(room_id),
+    foreign key (picked_user_id) references users(user_id)
+);
+   
